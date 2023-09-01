@@ -2,6 +2,7 @@ const path = require('path')
 const express = require('express')
 const app = express()
 const handlebars = require('express-handlebars')
+const session = require('express-session')
 
 require('./config')()
 
@@ -14,6 +15,20 @@ app.use(express.urlencoded({ extended: true }))
 
 app.engine('hbs', handlebars.create({ extname: '.hbs' }).engine)
 app.set('view engine', 'hbs')
+
+app.set('trust proxy', 1)
+app.use(require('express-session')({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true,
+    cookie: {}
+}))
+
+app.use(function (req, res, next) {
+    res.locals.authUser = req.session.authUser
+
+    next()
+})
 
 require('./routes')(app)
 

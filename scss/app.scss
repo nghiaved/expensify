@@ -1,19 +1,33 @@
+$primary-color: #17a2b8;
+$second-color: #EAEAEA;
+$white-color: #fff;
+$black-color: #000;
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
+body {
+    background-color: $second-color;
+}
+
+#main-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
 #auth-form {
     height: 100vh;
-    background-color: #17a2b8;
+    background-color: $primary-color;
 
     .container #auth-form-row #auth-form-column #auth-form-box {
         margin-top: 120px;
         max-width: 600px;
         height: 320px;
         border: 1px solid #9C9C9C;
-        background-color: #EAEAEA;
+        background-color: $second-color;
 
         #auth-form-form {
             padding: 20px;
@@ -25,22 +39,39 @@
     }
 }
 
-body {
-    .header {
-        color: salmon;
-        background: wheat;
-        padding: 30px;
-        margin: 30px;
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: $primary-color;
+    padding: 20px 40px;
+
+    .logo {
+        color: $second-color;
+        font-weight: 700;
+        font-style: italic;
         font-size: 30px;
-        font-weight: bold;
+        text-shadow: 2px 2px $black-color;
+
+        &:hover {
+            color: $second-color;
+            text-decoration: none;
+        }
     }
 
-    .footer {
-        color: wheat;
-        background: salmon;
-        padding: 30px;
-        margin: 30px;
-        font-size: 30px;
-        font-weight: bold;
+    .user {
+        font-size: 22px;
+        border: none;
+        outline: none;
+        background: unset;
+        color: $second-color;
     }
+}
+
+#footer {
+    color: $primary-color;
+    background: $white-color;
+    padding: 30px;
+    font-size: 30px;
+    font-weight: bold;
 }

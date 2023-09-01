@@ -3,6 +3,13 @@
   margin: 0;
   box-sizing: border-box; }
 
+body {
+  background-color: #EAEAEA; }
+
+#main-wrapper {
+  max-width: 1000px;
+  margin: 0 auto; }
+
 #auth-form {
   height: 100vh;
   background-color: #17a2b8; }
@@ -17,18 +24,31 @@
     #auth-form .container #auth-form-row #auth-form-column #auth-form-box #auth-form-form #register-link {
       margin-top: -85px; }
 
-body .header {
-  color: salmon;
-  background: wheat;
-  padding: 30px;
-  margin: 30px;
-  font-size: 30px;
-  font-weight: bold; }
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #17a2b8;
+  padding: 20px 40px; }
+  #header .logo {
+    color: #EAEAEA;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 30px;
+    text-shadow: 2px 2px #000; }
+    #header .logo:hover {
+      color: #EAEAEA;
+      text-decoration: none; }
+  #header .user {
+    font-size: 22px;
+    border: none;
+    outline: none;
+    background: unset;
+    color: #EAEAEA; }
 
-body .footer {
-  color: wheat;
-  background: salmon;
+#footer {
+  color: #17a2b8;
+  background: #fff;
   padding: 30px;
-  margin: 30px;
   font-size: 30px;
   font-weight: bold; }

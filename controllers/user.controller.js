@@ -1,6 +1,4 @@
 const userModel = require('../models/user.model')
-const { mongooseToObject } = require('../utils')
-
 
 const handleRegister = async (req, res, next) => {
     const { username, password } = req.body
@@ -13,13 +11,21 @@ const handleLogin = async (req, res, next) => {
     const { username, password } = req.body
     await userModel.findOne({ username })
         .then(user => {
-            !user
-                ? res.send(`User don't exist`)
-                : password !== user.password
-                    ? res.send(`Password invalid`)
-                    : res.render('home', { user: mongooseToObject(user) })
+            if (!user)
+                res.send(`User don't exist`)
+            else if (password !== user.password)
+                res.send(`Password invalid`)
+            else {
+                req.session.authUser = user
+                res.redirect('/')
+            }
         })
         .catch(next)
 }
 
-module.exports = { handleRegister, handleLogin }
+const handleLogout = async (req, res, next) => {
+    req.session.authUser = null
+    res.redirect('/')
+}
+
+module.exports = { handleRegister, handleLogin, handleLogout }

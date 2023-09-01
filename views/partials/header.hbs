@@ -1,3 +1,10 @@
-<div class="header">
-    Header
+<div id="header">
+    <a class="logo" href="/">Expensify</a>
+    <form action="/logout" method="post">
+        <button class="user">
+            {{authUser.username}}
+            &nbsp;
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </button>
+    </form>
 </div>
