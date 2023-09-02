@@ -1,15 +1,25 @@
-const { handleRegister, handleLogin, handleLogout } = require('../controllers/user.controller')
+const userRoute = require('./user.route')
+const expenseRoute = require('./expense.route')
+const expenseModel = require('../models/expense.model')
+const { multipleMongooseToObject } = require('../utils')
+
 
 function routes(app) {
-    app.get('/register', (req, res) => res.render('register', { singleBody: true }))
-    app.get('/login', (req, res) => res.render('login', { singleBody: true }))
-    app.post('/login', handleLogin)
-    app.post('/register', handleRegister)
-    app.post('/logout', handleLogout)
-    app.get('/', (req, res) => {
-        res.locals.authUser
-            ? res.render('home')
-            : res.render('login', { singleBody: true })
+    userRoute(app)
+    expenseRoute(app)
+
+    app.get('/', async (req, res, next) => {
+        if (res.locals.authUser) {
+            await expenseModel.find({ userId: res.locals.authUser._id })
+                .populate('userId', '-password')
+                .then(expenses => res.render('pages/home', {
+                    expenses: multipleMongooseToObject(expenses)
+                }))
+                .catch(next)
+        }
+        else {
+            res.render('pages/login', { singleBody: true })
+        }
     })
 }
 

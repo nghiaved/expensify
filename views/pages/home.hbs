@@ -1,0 +1,29 @@
+<div class="home">
+    <h1>Home page</h1>
+    <form action="/expense/create" method="post">
+        <input type="text" name="name" placeholder="Name">
+        <input type="number" min="1" name="price" placeholder="Price">
+        <button>Create</button>
+    </form>
+    <div>---------</div>
+    {{#each expenses}}
+    <div>
+        <b> Expense: </b>
+        {{this.name}}
+        {{this.price}}
+        {{this.userId.username}}
+        <form action="/expense/update/{{this._id}}" method="get">
+            <input type="text" name="name" placeholder="Name">
+            <input type="number" min="1" name="price" placeholder="Price">
+            <button>
+                Update
+            </button>
+        </form>
+        <button>
+            <a href="/expense/delete/{{this._id}}">Delete</a>
+        </button>
+    </div>
+    {{/each}}
+</div>
+
+<script src="/js/app.js"></script>

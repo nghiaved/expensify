@@ -3,7 +3,7 @@ const userModel = require('../models/user.model')
 const handleRegister = async (req, res, next) => {
     const { username, password } = req.body
     await userModel.create({ username, password })
-        .then(() => res.render('login', { singleBody: true }))
+        .then(() => res.render('pages/login', { singleBody: true }))
         .catch(next)
 }
 
