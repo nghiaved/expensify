@@ -1,29 +1,43 @@
 <div class="home">
-    <h1>Home page</h1>
-    <form action="/expense/create" method="post">
-        <input type="text" name="name" placeholder="Name">
-        <input type="number" min="1" name="price" placeholder="Price">
-        <button>Create</button>
-    </form>
-    <div>---------</div>
-    {{#each expenses}}
-    <div>
-        <b> Expense: </b>
-        {{this.name}}
-        {{this.price}}
-        {{this.userId.username}}
-        <form action="/expense/update/{{this._id}}" method="get">
-            <input type="text" name="name" placeholder="Name">
-            <input type="number" min="1" name="price" placeholder="Price">
-            <button>
-                Update
-            </button>
-        </form>
-        <button>
-            <a href="/expense/delete/{{this._id}}">Delete</a>
-        </button>
-    </div>
-    {{/each}}
+    <a href="/create">
+        <h1>Create</h1>
+    </a>
+    {{#if expenses}}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Username</th>
+                <th scope="col">Update</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each expenses}}
+            <tr>
+                <th scope="row">{{sum @index 1}}</th>
+                <td>{{this.name}}</td>
+                <td>{{this.price}}đ</td>
+                <td>{{this.userId.username}}</td>
+                <td>
+                    <a href="/update/{{this._id}}">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+                </td>
+                <td>
+                    <a href="/expense/delete/{{this._id}}">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <h1>Total: {{total expenses}}đ</h1>
+    {{else}}
+    &nbsp;
+    <h2>Chưa có expense nào.</h2>
+    {{/if}}
 </div>
-
-<script src="/js/app.js"></script>

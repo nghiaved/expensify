@@ -13,7 +13,18 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 
-app.engine('hbs', handlebars.create({ extname: '.hbs' }).engine)
+app.engine('hbs', handlebars.create({
+    extname: '.hbs',
+    helpers: {
+        'sum': (a, b) => (a + b),
+        'total': (data) => {
+            const value = data.reduce(function (total, num) {
+                return total + num.price
+            }, 0)
+            return value
+        }
+    },
+}).engine)
 app.set('view engine', 'hbs')
 
 app.set('trust proxy', 1)
