@@ -1,5 +1,7 @@
 <form action="/expense/create" method="post">
-    <h1>Create</h1>
+    <a href="/">
+        <h1>Home</h1>
+    </a>
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputEmail4">Name</label>
@@ -12,3 +14,8 @@
     </div>
     <button type="submit" class="btn btn-primary">Create</button>
 </form>
+{{#if status}}
+<h2>
+    Create successfully
+</h2>
+{{/if}}

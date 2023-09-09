@@ -6,7 +6,7 @@ const handleCreate = async (req, res, next) => {
     await expenseModel
         .findOne({ _id: createdExpense._id })
         .populate('userId', '-password')
-        .then(expense => res.redirect('/'))
+        .then(expense => res.render('pages/create', { status: true }))
         .catch(next)
 }
 

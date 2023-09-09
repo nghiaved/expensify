@@ -2,8 +2,6 @@ const path = require('path')
 const express = require('express')
 const app = express()
 const handlebars = require('express-handlebars')
-const session = require('express-session')
-
 require('./config')()
 
 app.set('views', path.join(__dirname, 'views'))
@@ -17,12 +15,31 @@ app.engine('hbs', handlebars.create({
     extname: '.hbs',
     helpers: {
         'sum': (a, b) => (a + b),
+        'price': (price) => {
+            let value = price.toString().split('').reverse()
+            let priceEnd = ''
+            value.map((item, index) => {
+                if (++index % 3 == 0 && index != value.length) {
+                    item += '.'
+                }
+                priceEnd += item
+            })
+            return priceEnd.split('').reverse().join('')
+        },
         'total': (data) => {
             const value = data.reduce(function (total, num) {
                 return total + num.price
             }, 0)
-            return value
-        }
+            let price = value.toString().split('').reverse()
+            let priceEnd = ''
+            price.map((item, index) => {
+                if (++index % 3 == 0 && index != price.length) {
+                    item += '.'
+                }
+                priceEnd += item
+            })
+            return priceEnd.split('').reverse().join('')
+        },
     },
 }).engine)
 app.set('view engine', 'hbs')
