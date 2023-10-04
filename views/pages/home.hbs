@@ -3,13 +3,22 @@
         <h1>Create</h1>
     </a>
     {{#if expenses}}
+    <form action="/expense/search" method="get">
+        <select class="form-select my-4 h-100" name="type">
+            <option value='All'>All</option>
+            {{#each type}}
+            <option value={{this}}>{{this}}</option>
+            {{/each}}
+        </select>
+        <button type="submit" class="btn btn-primary">Lọc</button>
+    </form>
     <table class="table table-striped">
         <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Price</th>
-                <th scope="col">Username</th>
+                <th scope="col">Type</th>
                 <th scope="col">Update</th>
                 <th scope="col">Delete</th>
             </tr>
@@ -20,7 +29,7 @@
                 <th scope="row">{{sum @index 1}}</th>
                 <td>{{this.name}}</td>
                 <td>{{price this.price}}đ</td>
-                <td>{{this.userId.username}}</td>
+                <td>{{this.type}}</td>
                 <td>
                     <a href="/update/{{this._id}}">
                         <i class="fa-solid fa-pen"></i>

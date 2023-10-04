@@ -12,9 +12,9 @@ const handleLogin = async (req, res, next) => {
     await userModel.findOne({ username })
         .then(user => {
             if (!user)
-                res.send(`User don't exist`)
+                res.render('pages/login', { singleBody: true, message: `User don't exist` })
             else if (password !== user.password)
-                res.send(`Password invalid`)
+                res.render('pages/login', { singleBody: true, message: `Password invalid` })
             else {
                 req.session.authUser = user
                 res.redirect('/')

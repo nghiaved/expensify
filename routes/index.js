@@ -22,9 +22,14 @@ function routes(app) {
         if (res.locals.authUser) {
             await expenseModel.find({ userId: res.locals.authUser._id })
                 .populate('userId', '-password')
-                .then(expenses => res.render('pages/home', {
-                    expenses: multipleMongooseToObject(expenses)
-                }))
+                .then(expenses => {
+                    const arr = []
+                    expenses.map(item => arr.push(item.type))
+                    res.render('pages/home', {
+                        expenses: multipleMongooseToObject(expenses),
+                        type: Array.from(new Set(arr))
+                    })
+                })
                 .catch(next)
         }
         else {

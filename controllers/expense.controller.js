@@ -1,8 +1,9 @@
 const expenseModel = require('../models/expense.model')
+const { multipleMongooseToObject } = require('../utils')
 
 const handleCreate = async (req, res, next) => {
-    const { name, price } = req.body
-    const createdExpense = await expenseModel.create({ name, price, userId: res.locals.authUser._id })
+    const { name, price, type } = req.body
+    const createdExpense = await expenseModel.create({ name, price, type, userId: res.locals.authUser._id })
     await expenseModel
         .findOne({ _id: createdExpense._id })
         .populate('userId', '-password')
@@ -29,4 +30,22 @@ const handleDelete = async (req, res, next) => {
         .catch(next)
 }
 
-module.exports = { handleCreate, handleRead, handleUpdate, handleDelete }
+const handleSearch = async (req, res, next) => {
+    if (req.query.type == 'All') res.redirect('/')
+    await expenseModel.find({ type: req.query.type, userId: res.locals.authUser._id })
+        .then(async expenses => {
+            await expenseModel.find({ userId: res.locals.authUser._id })
+                .then(all => {
+                    const arr = []
+                    all.map(item => arr.push(item.type))
+                    res.render('pages/home', {
+                        expenses: multipleMongooseToObject(expenses),
+                        type: Array.from(new Set(arr))
+                    })
+                })
+                .catch(next)
+        })
+        .catch(next)
+}
+
+module.exports = { handleCreate, handleRead, handleUpdate, handleDelete, handleSearch }
