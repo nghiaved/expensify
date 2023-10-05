@@ -24,31 +24,19 @@ body {
     #auth-form .container #auth-form-row #auth-form-column #auth-form-box #auth-form-form #register-link {
       margin-top: -85px; }
 
-#header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #17a2b8;
-  padding: 20px 40px; }
-  #header .logo {
-    color: #EAEAEA;
-    font-weight: 700;
-    font-style: italic;
-    font-size: 30px;
-    text-shadow: 2px 2px #000; }
-    #header .logo:hover {
-      color: #EAEAEA;
-      text-decoration: none; }
-  #header .user {
-    font-size: 22px;
-    border: none;
-    outline: none;
-    background: unset;
-    color: #EAEAEA; }
-
-#footer {
-  color: #17a2b8;
-  background: #fff;
-  padding: 30px;
+#header .logo {
+  color: #EAEAEA;
+  font-weight: 700;
+  font-style: italic;
   font-size: 30px;
-  font-weight: bold; }
+  text-shadow: 2px 2px #000; }
+  #header .logo:hover {
+    color: #EAEAEA;
+    text-decoration: none; }
+
+#header .user {
+  font-size: 22px;
+  border: none;
+  outline: none;
+  background: unset;
+  color: #EAEAEA; }

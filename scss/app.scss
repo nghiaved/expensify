@@ -40,12 +40,6 @@ body {
 }
 
 #header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: $primary-color;
-    padding: 20px 40px;
-
     .logo {
         color: $second-color;
         font-weight: 700;
@@ -66,12 +60,4 @@ body {
         background: unset;
         color: $second-color;
     }
-}
-
-#footer {
-    color: $primary-color;
-    background: $white-color;
-    padding: 30px;
-    font-size: 30px;
-    font-weight: bold;
 }

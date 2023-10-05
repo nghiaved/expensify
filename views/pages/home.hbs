@@ -1,17 +1,19 @@
 <div class="home">
-    <a href="/create">
-        <h1>Create</h1>
-    </a>
-    {{#if expenses}}
-    <form action="/expense/search" method="get">
-        <select class="form-select my-4 h-100" name="type">
-            <option value='All'>All</option>
-            {{#each type}}
-            <option value={{this}}>{{this}}</option>
-            {{/each}}
-        </select>
-        <button type="submit" class="btn btn-primary">Lọc</button>
-    </form>
+    <div class="row d-flex align-items-center justify-content-between px-4">
+        <a href="/create">
+            <button type="button" class="btn btn-primary my-4 px-4">Thêm chi tiêu</button>
+        </a>
+        {{#if expenses}}
+        <form action="/expense/search" method="get">
+            <select class="form-select px-4 py-1" name="type">
+                <option value='All'>All</option>
+                {{#each type}}
+                <option value={{this}}>{{this}}</option>
+                {{/each}}
+            </select>
+            <button type="submit" class="btn btn-primary">Lọc</button>
+        </form>
+    </div>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -19,6 +21,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Price</th>
                 <th scope="col">Type</th>
+                <th scope="col">Time</th>
                 <th scope="col">Update</th>
                 <th scope="col">Delete</th>
             </tr>
@@ -30,6 +33,7 @@
                 <td>{{this.name}}</td>
                 <td>{{price this.price}}đ</td>
                 <td>{{this.type}}</td>
+                <td>{{time this.createdAt}}</td>
                 <td>
                     <a href="/update/{{this._id}}">
                         <i class="fa-solid fa-pen"></i>
@@ -44,7 +48,7 @@
             {{/each}}
         </tbody>
     </table>
-    <h1>Total: {{total expenses}}đ</h1>
+    <h2 class="text-center m-4">Total: {{total expenses}}đ</h2>
     {{else}}
     &nbsp;
     <h2>Chưa có expense nào.</h2>

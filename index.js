@@ -2,6 +2,7 @@ const path = require('path')
 const express = require('express')
 const app = express()
 const handlebars = require('express-handlebars')
+const moment = require('moment')
 require('./config')()
 
 app.set('views', path.join(__dirname, 'views'))
@@ -40,6 +41,8 @@ app.engine('hbs', handlebars.create({
             })
             return priceEnd.split('').reverse().join('')
         },
+        'time': time => moment(time).format("YYYY-MM-DD HH:mm")
+
     },
 }).engine)
 app.set('view engine', 'hbs')
